@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: payload
+
+server:
+  port: 8082
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaserver:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+    registry-fetch-interval-seconds: 2
+    initial-instance-info-replication-interval-seconds: 2
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 2
+    lease-expiration-duration-in-seconds: 5

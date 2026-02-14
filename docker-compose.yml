@@ -1,0 +1,40 @@
+services:
+  eurekaserver:
+    build:
+      context: .
+      dockerfile: eurekaserver/Dockerfile
+    ports:
+      - "8761:8761"
+      - "1097:1097"
+
+  payload:
+    build:
+      context: .
+      dockerfile: payload/Dockerfile
+    depends_on:
+      - eurekaserver
+      - api-gateway
+    ports:
+      - "8082:8082"
+      - "1099:1099"
+
+  webmodule:
+    build:
+      context: .
+      dockerfile: webmodule/Dockerfile
+    depends_on:
+      - eurekaserver
+      - api-gateway
+    ports:
+      - "8081:8081"
+      - "1100:1100"
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    depends_on:
+      - eurekaserver
+    ports:
+      - "80:80"
+      - "1098:1098"
